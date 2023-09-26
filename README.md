@@ -1,1 +1,1 @@
-# rock-paper-scissors
+The purpose of this program is to learn how to code a simple game of Rock, Paper, Scissors that is playable from the console.  
