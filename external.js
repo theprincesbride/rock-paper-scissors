@@ -3,26 +3,39 @@ const choices = ['rock', 'paper', 'scissors'];
 function getComputerChoice() {
     return(choices[(Math.floor(Math.random() * choices.length))])
 };
+function getPlayerChoice() {
+    return prompt("Please choose rock, paper or scissors.").toLowerCase()
+}
 
-let playerSelection = prompt("Please choose rock, paper or scissors.", "").toLowerCase();
+
+let playerSelection = getPlayerChoice()
 let computerSelection = getComputerChoice();
+let computerScore = 0;
+let playerScore = 0;
+
+//function game(playerScore, computerScore) {
+  //  for (let playerScore = 0, let computerScore = 0; 
+    //    playerScore < 5 && computerScore < 5; 
+      //  playerScore++ || computerScore++) {}
+//}
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == 'rock' && computerSelection == 'scissors') 
-    {return 'Congratulations, your opponent chose scissors.  You win!';}
+    {(playerScore++); return 'Congratulations, your opponent chose scissors.  You win!';}
     else if (playerSelection == 'rock' && computerSelection == 'paper')
-    {return 'I\'m sorry, your opponent chose paper. You lose!';}
+    {(computerScore++); return 'I\'m sorry, your opponent chose paper. You lose!';}
     else if (playerSelection == 'rock' && computerSelection == 'rock')
     {return 'Your opponent also chose rock. It\'s a tie!';}
     else if (playerSelection == 'scissors' && computerSelection == 'paper')
-    {return 'Congratulations, your opponent chose paper.  You win!';}
+    {(playerScore++); return 'Congratulations, your opponent chose paper.  You win!';}
     else if (playerSelection == 'scissors' && computerSelection == 'rock')
-    {return 'I\'m sorry, your opponent chose rock. You lose!';}
+    {(computerScore++); return 'I\'m sorry, your opponent chose rock. You lose!';}
     else if (playerSelection == 'scissors' && computerSelection == 'scissors')
     {return 'Your opponet also chose scissors. It\'s a tie!'}
     else if (playerSelection == 'paper' && computerSelection == 'rock')
-    {return 'Congratulations, your opponent chose paper. You win!';}
+    {(playerScore++); return 'Congratulations, your opponent chose paper. You win!';}
     else if (playerSelection == 'paper' && computerSelection == 'scissors')
-    {return 'I\'m sorry, your opponent chose scissors. You lose!';}
+    {(computerScore++); return 'I\'m sorry, your opponent chose scissors. You lose!';}
     else {return 'Your opponent also chose paper. It\'s a tie!'} 
 }
+
