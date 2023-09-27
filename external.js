@@ -1,15 +1,6 @@
 const choices = ['rock', 'paper', 'scissors'];
 
-function getComputerChoice() {
-    return(choices[(Math.floor(Math.random() * choices.length))])
-};
-function getPlayerChoice() {
-    return prompt("Please choose rock, paper or scissors. Try to reach a score of 5 against the computer.").toLowerCase()
-};
 
-
-let playerSelection = getPlayerChoice()
-let computerSelection = getComputerChoice();
 let playerWinRock = 'Congratulations, your opponent chose scissors.  You win!';
 let playerWinScissors = 'Congratulations, your opponent chose paper.  You win!';
 let playerWinPaper = 'Congratulations, your opponent chose paper. You win!';
@@ -57,7 +48,15 @@ let tie = [tieRock, tieScissors, tiePaper];
 //}
 
 
-function playRound(playerSelection, computerSelection) {
+function playRound() {
+  function getComputerChoice() {
+    return(choices[(Math.floor(Math.random() * choices.length))])
+};
+let computerSelection = getComputerChoice();
+function getPlayerChoice() {
+    return prompt("Please choose rock, paper or scissors. Try to reach a score of 5 against the computer.").toLowerCase()
+};
+let playerSelection = getPlayerChoice();
   if (playerSelection == 'rock' && computerSelection == 'scissors') 
   {return playerWinRock;}
   else if (playerSelection == 'rock' && computerSelection == 'paper')
@@ -79,17 +78,18 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
   for (let playerScore = 0, computerScore = 0; 
-       playerScore < 5 || computerScore < 5;) {
+      playerScore < 5 || computerScore < 5;) {
       alert(`The score is ${playerScore} to ${computerScore}`); 
       getComputerChoice();
       getPlayerChoice();
       playRound(playerSelection, computerSelection);
-      if (computerScore == 5) {alert(`I'm sorry, you lost. The final score was ${playerScore} to ${computerScore}.`) 
+      if (playerWin) {return ++playerScore}
+      else if (computerWin) {return ++computerScore}
+      else if (computerScore == 5) {alert(`I'm sorry, you lost. The final score was ${playerScore} to ${computerScore}.`) 
       break;}
-    else if (playerScore == 5) {alert(`Congratulations, you won! The final score was ${playerScore} to ${computerScore}.`);
+      else if (playerScore == 5) {alert(`Congratulations, you won! The final score was ${playerScore} to ${computerScore}.`);
       break;}
       else {continue;}
     }
-      
    };
 
