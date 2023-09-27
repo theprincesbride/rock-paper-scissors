@@ -1,18 +1,22 @@
 const choices = ['rock', 'paper', 'scissors'];
+let playerScore = 0;
+let computerScore = 0;  
 
-
-let playerWinRock = 'Congratulations, your opponent chose scissors.  You win!';
-let playerWinScissors = 'Congratulations, your opponent chose paper.  You win!';
-let playerWinPaper = 'Congratulations, your opponent chose paper. You win!';
-let computerWinRock = 'I\'m sorry, your opponent chose rock. You lose!';
-let computerWinScissors = 'I\'m sorry, your opponent chose scissors. You lose!';
-let computerWinPaper = 'I\'m sorry, your opponent chose paper. You lose!';
-let tieRock = 'Your opponent also chose rock. It\'s a tie!';
-let tieScissors = 'Your opponet also chose scissors. It\'s a tie!';
-let tiePaper = 'Your opponent also chose paper. It\'s a tie!';
+let playerWinRock = `Congratulations, your opponent chose scissors.  You score a point!`;
+let playerWinScissors = `Congratulations, your opponent chose paper.  You score a point!`;
+let playerWinPaper = `Congratulations, your opponent chose paper. You score a point!`;
+let computerWinRock = `I'm sorry, your opponent chose rock. Your opponent scores a point!`;
+let computerWinScissors = `I'm sorry, your opponent chose scissors. Your opponent scores a point!`;
+let computerWinPaper = `I'm sorry, your opponent chose paper. Your opponent scores a point!`;
+let tieRock = `Your opponent also chose rock. Nobody scores a point.`;
+let tieScissors = `Your opponet also chose scissors. Nobody scores a point.`;
+let tiePaper = `Your opponent also chose paper. Nobody scores a point.`;
 let playerWin = [playerWinRock, playerWinScissors, playerWinPaper];
 let computerWin = [computerWinRock, computerWinScissors, computerWinPaper];
 let tie = [tieRock, tieScissors, tiePaper];
+let playerWinGame = `Congratulations! You scored 5 points against your opponent!  You win!`;
+let computerWinGame = `I'm sorry, your opponent scored 5 points.  You lost!`;
+
 
 
 
@@ -58,38 +62,31 @@ function getPlayerChoice() {
 };
 let playerSelection = getPlayerChoice();
   if (playerSelection == 'rock' && computerSelection == 'scissors') 
-  {return playerWinRock;}
+  {alert(playerWinRock); playerScore++;}
   else if (playerSelection == 'rock' && computerSelection == 'paper')
-  {return computerWinPaper;}
+  {alert(computerWinRock); computerScore++;}
   else if (playerSelection == 'rock' && computerSelection == 'rock')
-  {return tieRock;}
+  {alert(tieRock);}
   else if (playerSelection == 'scissors' && computerSelection == 'paper')
-  {return playerWinScissors;}
+  {alert(playerWinScissors); playerScore++;}
   else if (playerSelection == 'scissors' && computerSelection == 'rock')
-  {return computerWinRock;}
+  {alert(computerWinRock); computerScore++;}
   else if (playerSelection == 'scissors' && computerSelection == 'scissors')
-  {return tieScissors;}
+  {alert(tieScissors);}
   else if (playerSelection == 'paper' && computerSelection == 'rock')
-  {return playerWinPaper;}
+  {alert(playerWinPaper); playerScore++;}
   else if (playerSelection == 'paper' && computerSelection == 'scissors')
-  {return computerWinScissors;}
-  else {return tiePaper} 
+  {alert(computerWinScissors); computerScore++;}
+  else {alert(tiePaper);} 
 };
+ 
 
-function game() {
-  for (let playerScore = 0, computerScore = 0; 
-      playerScore < 5 || computerScore < 5;) {
-      alert(`The score is ${playerScore} to ${computerScore}`); 
-      getComputerChoice();
-      getPlayerChoice();
-      playRound(playerSelection, computerSelection);
-      if (playerWin) {return ++playerScore}
-      else if (computerWin) {return ++computerScore}
-      else if (computerScore == 5) {alert(`I'm sorry, you lost. The final score was ${playerScore} to ${computerScore}.`) 
-      break;}
-      else if (playerScore == 5) {alert(`Congratulations, you won! The final score was ${playerScore} to ${computerScore}.`);
-      break;}
-      else {continue;}
-    }
-   };
 
+function game() { 
+ for ( ; playerScore < 5 || computerScore < 5; ) {
+  playRound();}
+ if (playerScore == 5)
+ {return playerWinGame;}
+ else if (computerScore == 5)
+ {return computerWinGame;}
+}
