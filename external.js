@@ -25,103 +25,111 @@ function getPlayerChoice() {
   return prompt("Please choose rock, paper or scissors. Try to reach a score of 5 against the computer.").toLowerCase()
 };
 
-
-//this is for my plain if...else game format
-//function playRound(playerSelection, computerSelection) {
-    //if (playerSelection == 'rock' && computerSelection == 'scissors')
-    //{(playerScore++); return 'Congratulations, your opponent chose scissors.  You win!';}
-    //else if (playerSelection == 'rock' && computerSelection == 'paper')
-    //{(computerScore++); return 'I\'m sorry, your opponent chose paper. You lose!';}
-    //else if (playerSelection == 'rock' && computerSelection == 'rock')
-    //{return 'Your opponent also chose rock. It\'s a tie!';}
-    //else if (playerSelection == 'scissors' && computerSelection == 'paper')
-    //{(playerScore++); return 'Congratulations, your opponent chose paper.  You win!';}
-    //else if (playerSelection == 'scissors' && computerSelection == 'rock')
-    //{(computerScore++); return 'I\'m sorry, your opponent chose rock. You lose!';}
-    //else if (playerSelection == 'scissors' && computerSelection == 'scissors')
-    //{return 'Your opponet also chose scissors. It\'s a tie!'}
-    //else if (playerSelection == 'paper' && computerSelection == 'rock')
-    //{(playerScore++); return 'Congratulations, your opponent chose paper. You win!';}
-    //else if (playerSelection == 'paper' && computerSelection == 'scissors')
-    //{(computerScore++); return 'I\'m sorry, your opponent chose scissors. You lose!';}
-    //else {return 'Your opponent also chose paper. It\'s a tie!'}
-//}
-
-//this is my plain if...else game format
-//function game(playerScore, computerScore) {
-  //if (playerScore < 5 || computerScore < 5)
-  //{getPlayerChoice(); getComputerChoice();
-    //playRound(playerSelection, computerSelection);}
-    //else if (playerScore == 5)
-    //{alert('Congratulations! You win!')}
-    //else {alert('I\'m sorry, you lost!')}
-//}
-
-
-
 function playRound() {
 let computerSelection = getComputerChoice();
-console.log(computerSelection);
-//let playerSelection;
-let playerSelection = getPlayerChoice();
-console.log(playerSelection);
+//let playerSelection = getPlayerChoice();
+//console.log(playerSelection);
   if (playerSelection === 'rock' && computerSelection === 'scissors')
-  {alert(playerWinRock); playerScore++;}
+  {scoreMessageOutput.textContent = playerWinRock; playerScore++; userScoreOutput.textContent = playerScore;}
   else if (playerSelection === 'rock' && computerSelection === 'paper')
-  {alert(computerWinRock); computerScore++;}
+  {scoreMessageOutput.textContent = computerWinRock; computerScore++; opponentScoreOutput.textContent = computerScore;}
   else if (playerSelection === 'rock' && computerSelection === 'rock')
-  {alert(tieRock);}
+  {scoreMessageOutput.textContent = tieRock;}
   else if (playerSelection === 'scissors' && computerSelection === 'paper')
-  {alert(playerWinScissors); playerScore++;}
+  {scoreMessageOutput.textContent = playerWinScissors; playerScore++; userScoreOutput.textContent = playerScore;}
   else if (playerSelection === 'scissors' && computerSelection === 'rock')
-  {alert(computerWinRock); computerScore++;}
+  {scoreMessageOutput.textContent = computerWinRock; computerScore++; opponentScoreOutput.textContent = computerScore;}
   else if (playerSelection === 'scissors' && computerSelection === 'scissors')
-  {alert(tieScissors);}
+  {scoreMessageOutput.textContent = tieScissors;}
   else if (playerSelection === 'paper' && computerSelection === 'rock')
-  {alert(playerWinPaper); playerScore++;}
+  {scoreMessageOutput.textContent = playerWinPaper; playerScore++; userScoreOutput.textContent = playerScore;}
   else if (playerSelection === 'paper' && computerSelection === 'scissors')
-  {alert(computerWinScissors); computerScore++;}
+  {scoreMessageOutput.textContent = computerWinScissors; computerScore++; opponentScoreOutput.textContent = computerScore;}
   else if (playerSelection === 'paper' && computerSelection === 'paper')
-  {alert(tiePaper);}
+  {scoreMessageOutput.textContent = tiePaper;}
 };
 
 
 
 function game() {
- for ( ; playerScore < 5 || computerScore < 5; ) {
-  playRound();}
- if (playerScore === 5)
- {return playerWinGame;}
- else if (computerScore === 5)
- {return computerWinGame;}
-}
+  playRound();
+  if (playerScore === 5)
+    {
+      scoreMessageOutput.textContent = playerWinGame;
+      //let playAgainMessage = document.createElement("h2");
+      //playAgainMessage.setAttribute("class", "play-again");
+      //resetContainer.appendChild(playAgainMessage);
+      playAgainMessage.textContent = "Do you want to reset the game & play again?";
+      let resetButton = document.createElement("button");
+      resetButton.setAttribute("class", "reset");
+      playAgainMessage.appendChild(resetButton);
+      resetButton.textContent = "Reset the game";
+      resetButton.addEventListener('click', resetGame);
+
+    }
+
+  else if (computerScore === 5)
+    {
+      scoreMessageOutput.textContent = computerWinGame;
+      //let playAgainMessage = document.createElement("h2");
+      //playAgainMessage.setAttribute("class", "play-again");
+      //resetContainer.appendChild(playAgainMessage);
+      playAgainMessage.textContent = "Do you want to reset the game & play again?";
+      let resetButton = document.createElement("button");
+      resetButton.setAttribute("class", "reset");
+      playAgainMessage.appendChild(resetButton);
+      resetButton.textContent = "Reset the game";
+      resetButton.addEventListener('click', resetGame);
+    }
+  }
+
 
 //DOM
 
 function playerChooseRock() {
-  playerSelection = 'rock';
-  console.log(playerSelection);
+  return playerSelection = 'rock';
 };
 
 function playerChoosePaper() {
-  playerSelection = 'paper';
-  console.log(playerSelection);
+  return playerSelection = 'paper';
 };
 
 function playerChooseScissors() {
-  playerSelection = 'scissors';
-  console.log(playerSelection);
+  return playerSelection = 'scissors';
 };
 
 const rockBtn = document.querySelector(".button-choice-rock");
 const paperBtn = document.querySelector(".button-choice-paper");
 const scissorsBtn = document.querySelector(".button-choice-scissors");
 
-// rockBtn.addEventListener('click', game);
-// rockBtn.addEventListener('click', playerChooseRock);
+rockBtn.addEventListener('click', playerChooseRock);
+rockBtn.addEventListener('click', game);
 
-// paperBtn.addEventListener('click', game);
-// paperBtn.addEventListener('click', playerChoosePaper);
+paperBtn.addEventListener('click', playerChoosePaper);
+paperBtn.addEventListener('click', game);
 
-// scissorsBtn.addEventListener('click', game);
-// scissorsBtn.addEventListener('click', playerChooseScissors);
+scissorsBtn.addEventListener('click', playerChooseScissors);
+scissorsBtn.addEventListener('click', game);
+
+const userScoreOutput = document.querySelector('.user-score-output');
+userScoreOutput.textContent = playerScore;
+
+const opponentScoreOutput = document.querySelector('.opponent-score-output');
+opponentScoreOutput.textContent = computerScore;
+
+const scoreMessageOutput = document.querySelector('.score-message-output');
+scoreMessageOutput.textContent = "First to score 5 points wins the game!";
+
+const playAgainMessage = document.querySelector('.play-again');
+const resetContainer = document.querySelector(".reset-container");
+
+function resetGame() {
+  computerScore = 0;
+  playerScore = 0;
+  userScoreOutput.textContent = playerScore;
+  opponentScoreOutput.textContent = computerScore;
+  scoreMessageOutput.textContent = "First to score 5 points wins the game!";
+  playAgainMessage.textContent = '';
+  playAgainMessage.removeChild(resetButton);
+ // resetContainer.removeChild(playAgainMessage);
+}
